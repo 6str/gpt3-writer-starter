@@ -48,6 +48,17 @@ profiles.push({
 })
 
 
+// significant other
+profiles.push({
+    promptType: "Right Wing Rant Post",
+    caption: "Writes a right wing rant from your input",
+    basePrompt: `"write a short blog post or social media message in the style of a right wing rant".
+    input: `,
+    model: "text-davinci-003",
+    temperature: 0.9,
+    max_tokens: 256
+})
+
 // sensationalist story
 profiles.push({
     promptType: "Sensationalist Story Generator",
