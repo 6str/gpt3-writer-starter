@@ -6,46 +6,54 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+
 const basePromptPrefix = "";
+
 const generateAction = async (req, res) => {
   // Run first prompt
-  console.log(`API: ${basePromptPrefix}${req.body.userInput}`)
-
+//  console.log(`API: ${basePromptPrefix}${req.body.userInput}`)
+  console.log("wft!!!")
   const baseCompletion = await openai.createCompletion({
-    model: 'text-davinci-003',
-    prompt: `${basePromptPrefix}${req.body.userInput}`,
+    // model: 'text-davinci-003',
+    model: `${req.body.model}`,
+    // prompt: `${basePromptPrefix}${req.body.userInput}`,
+    // prompt: `Prompt: respond to the following input in the style of a Magic 8 Ball.
+    // input: ${req.body.userInput}`,
+    prompt: `${req.body.prompt}`,
     temperature: 0.7,
     max_tokens: 250,
   });
   
   const basePromptOutput = baseCompletion.data.choices.pop();
+  res.status(200).json({ output: basePromptOutput });
 
-    // build Prompt #2.
-  const secondPrompt = 
-  `
-  Take the table of contents and title of the blog post below and generate a blog post written in thwe style of Paul Graham. Make it feel like a story. Don't just list the points. Go deep into each one. Explain why.
 
-  Title: ${req.body.userInput}
+  //   // build Prompt #2.
+  // const secondPrompt = 
+  // `
+  // Take the table of contents and title of the blog post below and generate a blog post written in thwe style of Paul Graham. Make it feel like a story. Don't just list the points. Go deep into each one. Explain why.
 
-  Table of Contents: ${basePromptOutput.text}
+  // Title: ${req.body.userInput}
 
-  Blog Post:
-  `
+  // Table of Contents: ${basePromptOutput.text}
 
-  // call the OpenAI API a second time with Prompt #2
-  const secondPromptCompletion = await openai.createCompletion({
-    model: 'text-davinci-003',
-    prompt: `${secondPrompt}`,
-    // I set a higher temperature for this one. Up to you!
-    temperature: 0.85,
-		// I also increase max_tokens.
-    max_tokens: 1250,
-  });
+  // Blog Post:
+  // `
+
+  // // call the OpenAI API a second time with Prompt #2
+  // const secondPromptCompletion = await openai.createCompletion({
+  //   model: 'text-davinci-003',
+  //   prompt: `${secondPrompt}`,
+  //   // I set a higher temperature for this one. Up to you!
+  //   temperature: 0.85,
+	// 	// I also increase max_tokens.
+  //   max_tokens: 1250,
+  // });
   
-  // Get the output
-  const secondPromptOutput = secondPromptCompletion.data.choices.pop();
+  // // Get the output
+  // const secondPromptOutput = secondPromptCompletion.data.choices.pop();
 
-  res.status(200).json({ output: secondPromptOutput });
+  // res.status(200).json({ output: secondPromptOutput });
 };
 
 export default generateAction;

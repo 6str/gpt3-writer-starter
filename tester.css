@@ -1,0 +1,24 @@
+body {
+    background-color: black;
+}
+
+#dropDown select {
+    margin: 20px;
+    height: 40px;
+    color: whitesmoke;
+    background-color: rgb(17, 17, 18);
+    width: 90%;
+    max-width: 300px;
+    float: left;
+    border-radius: 5px;
+}
+
+#label {
+    margin: 20px;
+    width: 90%;
+    max-width: 300px;
+    color: whitesmoke;
+    background-color: rgb(17, 17, 18);
+    padding: 10px;
+    border-radius: 5px;
+}
