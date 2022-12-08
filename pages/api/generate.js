@@ -11,17 +11,12 @@ const basePromptPrefix = "";
 
 const generateAction = async (req, res) => {
   // Run first prompt
-//  console.log(`API: ${basePromptPrefix}${req.body.userInput}`)
-  console.log("wft!!!")
+
   const baseCompletion = await openai.createCompletion({
-    // model: 'text-davinci-003',
-    model: `${req.body.model}`,
-    // prompt: `${basePromptPrefix}${req.body.userInput}`,
-    // prompt: `Prompt: respond to the following input in the style of a Magic 8 Ball.
-    // input: ${req.body.userInput}`,
-    prompt: `${req.body.prompt}`,
-    temperature: 0.7,
-    max_tokens: 250,
+    model: req.body.model, // `${req.body.model}`, // origonally like this but not needed
+    prompt: req.body.prompt, // `${req.body.prompt}`,
+    temperature: req.body.temperature, // and the ${} pattern does not work for numbers
+    max_tokens: req.body.max_tokens,
   });
   
   const basePromptOutput = baseCompletion.data.choices.pop();

@@ -13,23 +13,18 @@ const Home = () => {
 
   const [title, setTitle] = useState('')
   const [caption, setCaption] = useState('')
-  const [basePromptPrefix, setBasePromptPrefix] = useState(null)  //? used in /api/generate
-  // const [callPrompt, setCallPrompt] = useState('')  //?
+  const [basePromptPrefix, setBasePromptPrefix] = useState(null)
 
   let currentProfile = profiles[0]
-  const selectorDefault = currentProfile.promptType
-
-
+  const selectorDefault = currentProfile.title
 
 
   const callGenerateEndpoint = async () => {
     setIsGenerating(true);
     console.log("Calling OpenAI...")
 
-    console.log("basePromptPrefix:", basePromptPrefix)
     console.log("userInput:", JSON.stringify({ userInput }))
     const combinedPrompt = (basePromptPrefix + userInput)
-    console.log("combinedPrompt:",combinedPrompt)
 
     const response = await fetch('/api/generate', {
       method: 'POST',
@@ -65,8 +60,8 @@ const Home = () => {
 
 
   const setPrompt = (selection) => {
-    currentProfile = profiles.find(profile => profile.promptType == selection) // find rather than filter as returns found object instead of array of object(s)
-    console.log(currentProfile)
+    currentProfile = profiles.find(profile => profile.title == selection) // find rather than filter as returns found object instead of array of object(s)
+    console.log(currentProfile.title)
     setTitle(selection)
     setCaption(currentProfile.caption)
     setBasePromptPrefix(currentProfile.basePrompt)
@@ -78,26 +73,23 @@ const Home = () => {
     <div className="propmtSelector">
         <select className='selectBox' defaultValue={selectorDefault} onChange={selectChange}>
           {profiles.map((profile) => (
-            <option value={profile.promptType}>{profile.promptType}</option>
+            <option  style={{lineHeight: '20px'}} value={profile.title}>{profile.title}</option>
           ))}
         </select>
     </div>
     )
   }
 
+
   useEffect(() => {
-    console.log('useEffect')
     setPrompt(selectorDefault);
 
-    const el = document.getElementById('prompt-box');
-    console.log("el",el);
-   
   }, [])
 
   return (
     <div className="root">
       <Head>
-        <title>Agony Auntie</title>
+        <title>{title}</title>
       </Head>
       <div className="container">
         <div className="header">
@@ -111,7 +103,7 @@ const Home = () => {
         <div className="prompt-container">
           <textarea
             className="prompt-box"
-            placeholder="start typing here"
+            placeholder="type input here"
             value={userInput}
             onChange={onUserChangedText}
           />; 
@@ -124,7 +116,7 @@ const Home = () => {
             onClick={callGenerateEndpoint}
           >
           <div className="generate">
-            {isGenerating ? <span className="loader"></span> : <p>ask</p>}
+            {isGenerating ? <span className="loader"></span> : <p>go</p>}
           </div>
           </a>
         </div>
