@@ -43,7 +43,7 @@ const Home = () => {
     const { output } = data;
     console.log("OpenAI replied...", output.text)
   
-    setApiOutput(`${output.text}`);
+    setApiOutput(`${output.text.trim()}`);
     setIsGenerating(false);
   }
 
