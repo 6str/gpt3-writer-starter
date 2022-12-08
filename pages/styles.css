@@ -34,7 +34,7 @@ body {
     padding: 50px;
     position: relative;
     width: auto;
-    /* gap: 64px; */
+    gap: 64px;
 }
 
 .header {    
@@ -75,7 +75,7 @@ body {
     display: flex;
     flex: 0 0 auto;
     flex-flow: column nowrap;
-    /* gap: 16px; */
+    gap: 16px;
     height: min-content;
     padding: 0px;
     width: min-content;
@@ -130,7 +130,7 @@ textarea {
 
 .selectBox {
     height: 40px;
-    width: 100%;
+    width: 300px;
     margin: 0 10px; 
     padding: 0 10px;
     font-size: 18px;
@@ -159,7 +159,7 @@ textarea {
 
 .prompt-buttons {
     display: flex;
-    place-content: center;
+    /* place-content: center; */
     align-items: center;
     justify-content: space-between;
     flex: 0 0 auto;
@@ -169,7 +169,7 @@ textarea {
     overflow: hidden;
     padding: 0px;
     position: relative;
-    width: 100%;
+    width: 600px;
 }
 
 .key-stroke {
