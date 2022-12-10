@@ -89,7 +89,7 @@ const Home = () => {
   return (
     <div className="root">
       <Head>
-        <title>{title}</title>
+        <title>GPT Genie</title>
       </Head>
       <div className="container">
         <div className="header">
