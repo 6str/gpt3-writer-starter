@@ -198,7 +198,7 @@ profiles.push({
 // raw AI - no prompt shaping
 profiles.push({
     title: "Raw AI",
-    caption: "Vanilla AI response",
+    caption: "Raw AI response",
     basePrompt: ``,
     model: "text-davinci-003",
     temperature: 0.7,

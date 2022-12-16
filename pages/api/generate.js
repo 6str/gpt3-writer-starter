@@ -13,16 +13,16 @@ const generateAction = async (req, res) => {
   // Run first prompt
 
   const baseCompletion = await openai.createCompletion({
-    model: req.body.model, // `${req.body.model}`, // origonally like this but not needed
-    prompt: req.body.prompt, // `${req.body.prompt}`,
-    temperature: req.body.temperature, // and the ${} pattern does not work for numbers
+    model: req.body.model,              // `${req.body.model}`, // origonal code like this but not needed
+    prompt: req.body.prompt,            // `${req.body.prompt}`,
+    temperature: req.body.temperature,  // and the ${} pattern does not work here for numbers
     max_tokens: req.body.max_tokens,
   });
   
   const basePromptOutput = baseCompletion.data.choices.pop();
   res.status(200).json({ output: basePromptOutput });
 
-
+// note: not using two prompts as it takes too long and free tier on Vercel only 10s for server processes
   //   // build Prompt #2.
   // const secondPrompt = 
   // `

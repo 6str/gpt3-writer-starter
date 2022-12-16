@@ -146,16 +146,18 @@ textarea {
     margin: 20px;
 }
 
-/* Style The Dropdown Button */
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
+    
+#counter {
+    color:rgb(6, 141, 48);
+    background-color: rgb(0, 0, 0);
+    text-align: left;
     font-size: 16px;
-    border: none;
-    cursor: pointer;
-  }
-  
+    font-weight: bold;
+    height: 30px;
+    max-width: 80px;
+    border-style: hidden;
+}
+
 
 .prompt-buttons {
     display: flex;
@@ -212,14 +214,17 @@ textarea {
     background-color: rgb(6, 118, 42);
     border-radius: 30px;
     display: flex;
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
+    /* flex: 0 0 auto;
+    flex-flow: column nowrap; */
+    justify-content: center;
+    align-items: flex-end;
     gap: 10px;
     height: min-content;
     overflow: hidden;
     padding: 16px 24px;
     position: relative;
     text-decoration: none;
+    height: 20px;
     width:60px;
     text-align: right;
     will-change: transform;
@@ -236,7 +241,6 @@ textarea {
 }
 
 .generate p {
-    /* color: rgb(255, 255, 255); */
     color: rgb(246, 229, 191);
     margin: 0;
 }
