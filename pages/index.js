@@ -39,9 +39,10 @@ const Home = () => {
 
   const callGenerateEndpoint = async () => {
 
+    // looks like setTimeout not going to work on vercel?
     // if(!isGenerating) {
-      setCounter(0) // initiates counting
-      setShowCounter(true)
+//      setCounter(0) // initiates counting
+//      setShowCounter(true)
     // }
 
     // setIsGenerating(!isGenerating);
