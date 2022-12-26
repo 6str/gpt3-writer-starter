@@ -6,14 +6,11 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-
-const basePromptPrefix = "";
-
 const generateAction = async (req, res) => {
   // Run first prompt
 
   const baseCompletion = await openai.createCompletion({
-    model: req.body.model,              // `${req.body.model}`, // origonal code like this but not needed
+    model: req.body.model,              // `${req.body.model}`, // origonal tutorial code like this but not needed
     prompt: req.body.prompt,            // `${req.body.prompt}`,
     temperature: req.body.temperature,  // and the ${} pattern does not work here for numbers
     max_tokens: req.body.max_tokens,
