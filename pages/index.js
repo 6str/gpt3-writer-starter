@@ -14,12 +14,40 @@ const Home = () => {
   const [title, setTitle] = useState('')
   const [caption, setCaption] = useState('')
   const [basePromptPrefix, setBasePromptPrefix] = useState(null)
+  const [counter, setCounter] = useState(0)
+  const [showCounter, setShowCounter] = useState(false)
 
   let currentProfile = profiles[0]
   const selectorDefault = currentProfile.title
+  const timeout = 20
+  const timeoutMsg = "timed out?"
+  
+
+  useEffect(() => {
+
+    if(isGenerating && counter < timeout) {
+      setTimeout(() => setCounter(counter + 1), 1000);
+    } else if (isGenerating && counter != timeoutMsg) { 
+      setIsGenerating(false)
+      setCounter(timeoutMsg);
+    } else if (!isGenerating && counter != timeoutMsg) { 
+      setShowCounter(false)
+    }
+
+  }, [counter]);
 
 
   const callGenerateEndpoint = async () => {
+
+    // looks like setTimeout for a counter not going to work on vercel
+    // if(!isGenerating) {
+    //   setCounter(0) // initiates counting
+    //   setShowCounter(true)
+    // }
+
+    // setIsGenerating(!isGenerating);
+    // return
+
     setIsGenerating(true);
     console.log("Calling OpenAI...")
 
@@ -49,7 +77,6 @@ const Home = () => {
 
 
   const onUserChangedText = (event) => {
-    // console.log(event.target.value);
     setUserInput(event.target.value);
   };
 
@@ -72,10 +99,11 @@ const Home = () => {
     return (
     <div className="propmtSelector">
         <select className='selectBox' defaultValue={selectorDefault} onChange={selectChange}>
-          {profiles.map((profile) => (
-            <option  style={{lineHeight: '20px'}} value={profile.title}>{profile.title}</option>
+          {profiles.map((profile, index) => (
+            <option  style={{lineHeight: '20px'}} value={profile.title} key={index}>{profile.title}</option>
           ))}
         </select>
+        <input id="counter" type="text" hidden={!showCounter} value={counter}></input>
     </div>
     )
   }
@@ -111,13 +139,16 @@ const Home = () => {
 
         <div className="prompt-buttons">
           {renderPromptSelector()}
+          
           <a
             className={isGenerating ? 'generate-button loading' : 'generate-button'}
             onClick={callGenerateEndpoint}
           >
+
           <div className="generate">
             {isGenerating ? <span className="loader"></span> : <p>go</p>}
           </div>
+          
           </a>
         </div>
       </div>
